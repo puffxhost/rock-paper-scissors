@@ -1,0 +1,127 @@
+/* Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+}
+
+/* Header */
+h1 {
+    background-color: #1a1a1a;
+    color: #f5f5f5;
+    text-align: center;
+    line-height: 4rem;
+    font-size: 2rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+}
+
+/* Buttons container */
+.game-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 25px;
+    margin-top: 8%;
+    flex-wrap: wrap;
+}
+
+/* Each button */
+.game-button button {
+    padding: 15px 30px;
+    font-size: 18px;
+    font-weight: 600;
+    border: none;
+    border-radius: 12px;
+    background: linear-gradient(145deg, #6a5acd, #836fff);
+    color: #fff;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+}
+
+.game-button button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+}
+
+.game-button button:active {
+    transform: translateY(0);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+/* Score section */
+.score {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15%;
+    margin-top: 50px;
+    flex-wrap: wrap;
+}
+
+.score .you, .score .com {
+    text-align: center;
+    background-color: #f0f0f0;
+    padding: 20px 30px;
+    border-radius: 15px;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+}
+
+.score p {
+    font-size: 20px;
+    margin: 5px 0;
+}
+
+.main-score {
+    font-size: 36px;
+    font-weight: 700;
+    color: #1a1a1a;
+}
+
+/* Message container */
+.mess-con {
+    display: flex;
+    justify-content: center;
+    margin-top: 40px;
+}
+
+.mess {
+    background-color: #1a1a1a;
+    color: #fff;
+    padding: 15px 25px;
+    border-radius: 12px;
+    font-size: 20px;
+    font-weight: 500;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+    text-align: center;
+    min-width: 250px;
+}
+
+/* Responsive for mobile */
+@media (max-width: 600px) {
+    .game-button {
+        gap: 15px;
+    }
+    
+    .game-button button {
+        padding: 12px 20px;
+        font-size: 16px;
+    }
+    
+    .score {
+        gap: 10%;
+    }
+    
+    .main-score {
+        font-size: 28px;
+    }
+    
+    .mess {
+        font-size: 18px;
+        padding: 12px 18px;
+    }
+}
