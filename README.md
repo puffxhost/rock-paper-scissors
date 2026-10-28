@@ -1,84 +1,84 @@
+# 🪨 Rock Paper Scissors — Puffx Host Arcade
 
+A polished, responsive Rock Paper Scissors game built with plain HTML, CSS, and JavaScript. Play a best-of-five match against the computer or keep going in Endless mode.
 
-  <h1>🪨✂️📄 Rock–Paper–Scissors Game</h1>
+## 🎮 Live demo
 
-  <p>A simple and interactive Rock–Paper–Scissors game built using <strong>HTML, CSS, and JavaScript</strong>.  
-  Users can play against the computer, and the scores update in real-time with a message showing the winner of each round.</p>
+[**Play the Puffx Host Rock Paper Scissors game →**](https://htmlpreview.github.io/?https://github.com/puffxhost/rock-paper-scissors/blob/32df2decda40627859ea54d0f882a33dc888a30b/index.html)
 
-  <h2>🎮 Features</h2>
-  <ul>
-    <li>User-friendly interface with clickable buttons</li>
-    <li>Random computer choice generation</li>
-    <li>Real-time score tracking for user and computer</li>
-    <li>Dynamic messages showing round results</li>
-    <li>Fully responsive and mobile-friendly design</li>
-    <li>Smooth button animations and modern UI</li>
-  </ul>
+The demo is a static page. No account, installation, build step, or backend is required.
 
-  <h2>🖥️ How to Play</h2>
-  <ol>
-    <li>Open <code>index.html</code> in a browser.</li>
-    <li>Click on <strong>Rock</strong>, <strong>Papper</strong>, or <strong>Sijar</strong>.</li>
-    <li>The computer will automatically choose its move.</li>
-    <li>Scores will update, and the result of the round will appear below the buttons.</li>
-  </ol>
+## ✨ Features
 
-  <h2>📁 Project Structure</h2>
-  <pre>
+- 🏆 **First to five** match mode, with a visible score tracker and winner screen
+- ♾️ **Endless mode** for open-ended play
+- 🪨 **Rock, Paper, Scissors** moves with instant computer responses
+- ⌨️ **Keyboard controls:** press **R**, **P**, or **S** to choose a move
+- ↶ **Undo** the most recent round, including score and streak updates
+- 📊 **Session stats:** win rate, current streak, and rounds played
+- 🧾 **Recent round history** with an option to clear it
+- 🔊 Optional sound effects, off by default
+- 🎉 Animated move reveals and a match-win celebration
+- 📱 Responsive layout, accessible status updates, and reduced-motion support
+- 🔒 Self-contained static app with no third-party scripts or tracking
+
+## 🕹️ How to play
+
+1. Open the [live demo](https://htmlpreview.github.io/?https://github.com/puffxhost/rock-paper-scissors/blob/32df2decda40627859ea54d0f882a33dc888a30b/index.html), or open `index.html` locally.
+2. Choose **First to 5** or **Endless**.
+3. Pick Rock, Paper, or Scissors. You can also use **R**, **P**, or **S** on your keyboard.
+4. In First to 5, the first player to win five rounds wins the match.
+5. Use **Undo last round** to take back the most recent move, or **New match** to reset the scoreboard.
+
+### Rules
+
+- 🪨 Rock beats ✂️ Scissors
+- 📄 Paper beats 🪨 Rock
+- ✂️ Scissors beats 📄 Paper
+- Matching moves are a draw
+
+## 🚀 Run locally
+
+There are no dependencies or build tools.
+
+1. Clone this repository:
+
+   ```sh
+   git clone https://github.com/puffxhost/rock-paper-scissors.git
+   cd rock-paper-scissors
+   ```
+
+2. Open `index.html` in a modern browser.
+
+   Or start a local static server:
+
+   ```sh
+   python3 -m http.server 8000
+   ```
+
+   Then visit <http://localhost:8000>.
+
+## 📂 Project structure
+
+```text
 rock-paper-scissors/
-├── index.html      # Main HTML file
-├── stype.css       # Stylesheet for UI
-└── script.js       # Game logic in JavaScript
-  </pre>
+├── index.html   # Complete game: markup, styling, and game logic
+├── README.md    # Project guide and demo link
+└── LICENSE      # MIT license
+```
 
-  <h2>⚙️ Installation</h2>
-  <ol>
-    <li><strong>Clone the repository:</strong>
-      <pre><code>git clone https://github.com/puffxhost/rock-paper-scissors.git</code></pre>
-    </li>
-    <li>Open the folder and launch <code>index.html</code> in any modern browser.</li>
-  </ol>
+## 🛠️ Built with
 
-  <h2>🛠️ Technologies Used</h2>
-  <ul>
-    <li>HTML5</li>
-    <li>CSS3 (Flexbox, Responsive Design)</li>
-    <li>JavaScript (Vanilla JS)</li>
-  </ul>
+- HTML5
+- CSS3, including responsive layouts, animations, and reduced-motion support
+- Vanilla JavaScript
 
-  <h2>✨ UI Highlights</h2>
-  <ul>
-    <li>Gradient buttons with hover and click effects</li>
-    <li>Score displayed in card-like containers</li>
-    <li>Dynamic messages with rounded background</li>
-    <li>Fully responsive layout for mobile and desktop</li>
-  </ul>
+## 📜 License
 
-  <h2>📜 License</h2>
-  <p>This project is licensed under the <strong>MIT License</strong>. See the <code>LICENSE</code> file for details.</p>
+This project is licensed under the [MIT License](LICENSE).
 
-  <h2>🙌 Contributing</h2>
-  <p>Contributions are welcome! Fork the repo, make improvements, and submit a pull request.</p>
+## 🛟 Support
 
-  <h2>🔗 About</h2>
-  <p>Created by <strong>Nitin Mehta</strong>.  
-  Official site: <a href="https://puffxhost.com" target="_blank">https://puffxhost.com</a></p>
-
-  <hr>
-  <p class="center">Developed with ❤️ by <strong>Puffx Host</strong></p>
-
-</body>
-</html>
-
-## 🛟 Support & Contact
-
-Need help or want to report an issue?
-
-- 🌐 Website: [puffxhost.com/contact](https://puffxhost.com/contact)
-- 📧 Email: [support@puffxhost.in](mailto:support@puffxhost.in)
-- 📞 Call: [+91 8602967573](https://wa.me/918602967573)
-- 💬 WhatsApp: [+91 7354336624](https://wa.me/917354336624)
-
-## ⭐️ Give a Star
-
-If you found this project useful, please consider giving it a star on GitHub to support its development.
+- 🌐 [Puffx Host](https://puffxhost.com)
+- 📧 [support@puffxhost.in](mailto:support@puffxhost.in)
+- 🐛 [Report an issue](https://github.com/puffxhost/rock-paper-scissors/issues)
