@@ -25,7 +25,7 @@
 <body>
   <header class="shell topbar">
     <a class="brand" href="#" aria-label="Puffx Host games"><span class="brand-mark" aria-hidden="true">✦</span><span><strong>Puffx Host</strong> Arcade</span></a>
-    <div class="top-actions"><button class="utility" id="soundToggle" type="button" aria-pressed="false" title="Toggle game sounds">🔇 Sound off</button><button class="utility" id="resetButton" type="button" title="Start a fresh match">↻ New match</button></div>
+    <div class="top-actions"><button class="utility" id="soundToggle" type="button" aria-pressed="true" title="Toggle game sounds">🔊 Sound on</button><button class="utility" id="resetButton" type="button" title="Start a fresh match">↻ New match</button></div>
   </header>
   <main class="shell">
     <section class="intro" aria-labelledby="title">
@@ -53,12 +53,15 @@
       "use strict";
       const icons={rock:"🪨",paper:"📄",scissors:"✂️"};
       const beats={rock:"scissors",paper:"rock",scissors:"paper"};
-      const state={player:0,cpu:0,round:0,mode:"best",history:[],streak:0,bestStreak:0,wins:0,losses:0,draws:0,sound:false,locked:false};
+      const state={player:0,cpu:0,round:0,mode:"best",history:[],streak:0,bestStreak:0,wins:0,losses:0,draws:0,sound:true,locked:false};
       let turnTimer=null,thoughtInterval=null;
       const $=id=>document.getElementById(id);
       const ui={player:$("playerScore"),cpu:$("computerScore"),round:$("roundLabel"),progress:$("progress"),playerHand:$("playerHand"),cpuHand:$("computerHand"),playerMove:$("playerMove"),cpuMove:$("computerMove"),title:$("resultTitle"),sub:$("resultSub"),history:$("history"),undo:$("undoButton"),rate:$("winRate"),streak:$("streak"),roundCount:$("roundCount"),best:$("bestMode"),endless:$("endlessMode"),toast:$("toast"),sound:$("soundToggle"),choices:[...document.querySelectorAll(".choice")]};
       const randomMove=()=>["rock","paper","scissors"][Math.floor(Math.random()*3)];
-      function playTone(frequency,duration=.09,type="sine"){if(!state.sound)return;try{const context=new(window.AudioContext||window.webkitAudioContext)(),osc=context.createOscillator(),gain=context.createGain();osc.type=type;osc.frequency.value=frequency;gain.gain.setValueAtTime(.045,context.currentTime);gain.gain.exponentialRampToValueAtTime(.001,context.currentTime+duration);osc.connect(gain);gain.connect(context.destination);osc.start();osc.stop(context.currentTime+duration);osc.onended=()=>context.close()}catch{}}
+      let audioContext=null,masterGain=null;
+      function getAudioContext(){if(!state.sound)return null;try{if(!audioContext){const Audio=window.AudioContext||window.webkitAudioContext;if(!Audio)return null;audioContext=new Audio();masterGain=audioContext.createGain();masterGain.gain.value=.48;masterGain.connect(audioContext.destination)}if(audioContext.state==="suspended")audioContext.resume();masterGain.gain.setTargetAtTime(.48,audioContext.currentTime,.025);return audioContext}catch{return null}}
+      function playNote(frequency,duration,delay=0,type="sine",volume=.14,slideTo=0){const context=getAudioContext();if(!context)return;try{const start=context.currentTime+delay,osc=context.createOscillator(),gain=context.createGain();osc.type=type;osc.frequency.setValueAtTime(frequency,start);if(slideTo)osc.frequency.exponentialRampToValueAtTime(slideTo,start+duration*.88);gain.gain.setValueAtTime(.0001,start);gain.gain.exponentialRampToValueAtTime(volume,start+.012);gain.gain.exponentialRampToValueAtTime(.0001,start+duration);osc.connect(gain);gain.connect(masterGain);osc.start(start);osc.stop(start+duration+.015)}catch{}}
+      function playEffect(name){if(!state.sound)return;const effects={move:[[560,.075,0,"triangle",.16],[760,.09,.045,"sine",.1]],thinking:[[350,.28,0,"sine",.055,500],[500,.3,.25,"sine",.05,720]],win:[[523,.18,0,"triangle",.13],[659,.18,.1,"triangle",.13],[784,.21,.2,"triangle",.14],[1047,.34,.31,"sine",.15]],loss:[[392,.19,0,"triangle",.11],[330,.22,.15,"triangle",.1],[262,.32,.32,"sine",.1]],draw:[[440,.16,0,"sine",.1],[494,.22,.17,"sine",.1]],victory:[[523,.18,0,"triangle",.14],[659,.18,.1,"triangle",.14],[784,.2,.2,"triangle",.15],[1047,.22,.31,"triangle",.15],[1319,.42,.43,"sine",.17]],matchLoss:[[392,.18,0,"triangle",.12],[330,.2,.14,"triangle",.11],[262,.23,.3,"triangle",.1],[196,.38,.48,"sine",.1]],toggle:[[660,.1,0,"sine",.11],[880,.13,.08,"sine",.1]]};(effects[name]||[]).forEach(note=>playNote(...note))}
       function say(message){ui.toast.textContent=message;ui.toast.hidden=false;clearTimeout(say.timer);say.timer=setTimeout(()=>ui.toast.hidden=true,2200)}
       function buildProgress(){ui.progress.replaceChildren();for(let i=0;i<5;i++){const pip=document.createElement("span");pip.className="pip"+(i<state.player?" user":i<state.cpu?" cpu":"");ui.progress.append(pip)}ui.progress.setAttribute("aria-label",state.mode==="best"?"First to five progress":"Endless mode; score progress");ui.progress.hidden=state.mode==="endless"}
       function matchWinner(){return state.mode==="best"&&(state.player>=5||state.cpu>=5)}
@@ -68,7 +71,7 @@
         if(state.locked||state.animating)return;
         state.animating=true;
         ui.choices.forEach(button=>button.disabled=true);
-        const cpu=randomMove(),streakBefore=state.streak;
+        const cpu=randomMove(),streakBefore=state.streak;\n        playEffect("move");\n        playEffect("thinking");
         ui.playerHand.textContent=icons[move];
         ui.playerHand.className="hand reveal";
         ui.cpuHand.textContent="🤔";
@@ -113,7 +116,7 @@
       $("endlessMode").addEventListener("click",()=>{if(state.mode!=="endless"){state.mode="endless";reset()}});
       $("undoButton").addEventListener("click",()=>{const entry=state.history.shift();if(!entry)return;state.round--;if(entry.result==="win"){state.player--;state.wins--}else if(entry.result==="loss"){state.cpu--;state.losses--}else state.draws--;state.streak=entry.streakBefore;ui.playerHand.textContent="❔";ui.cpuHand.textContent="❔";ui.playerHand.className="hand";ui.cpuHand.className="hand";ui.title.textContent="Round undone";ui.title.className="result-title";ui.sub.textContent="Choose a move when you’re ready.";render()});
       $("clearHistoryButton").addEventListener("click",()=>{if(!state.history.length){say("There’s no match history yet.");return}state.history=[];say("Round history cleared.");render()});
-      ui.sound.addEventListener("click",()=>{state.sound=!state.sound;ui.sound.textContent=state.sound?"🔊 Sound on":"🔇 Sound off";ui.sound.setAttribute("aria-pressed",String(state.sound));if(state.sound)playTone(520,.08)});
+      ui.sound.textContent=state.sound?"🔊 Sound on":"🔇 Sound off";ui.sound.setAttribute("aria-pressed",String(state.sound));ui.sound.addEventListener("click",()=>{state.sound=!state.sound;ui.sound.textContent=state.sound?"🔊 Sound on":"🔇 Sound off";ui.sound.setAttribute("aria-pressed",String(state.sound));if(masterGain&&audioContext){masterGain.gain.setTargetAtTime(state.sound?.48:.0001,audioContext.currentTime,.025)}if(state.sound)playEffect("toggle")});
       $("year").textContent=new Date().getFullYear();render();
     })();
   </script>
