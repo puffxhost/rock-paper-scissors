@@ -4,7 +4,7 @@ A polished, responsive Rock Paper Scissors game built with plain HTML, CSS, and 
 
 ## 🎮 Live demo
 
-[**Play the Puffx Host Rock Paper Scissors game →**](https://htmlpreview.github.io/?https://github.com/puffxhost/rock-paper-scissors/blob/695c1c97c045a6f1676d3d58687df3087af4893a/index.html)
+[**Play the Puffx Host Rock Paper Scissors game →**](https://htmlpreview.github.io/?https://github.com/puffxhost/rock-paper-scissors/blob/27e0dbb0a647e81d3067fe708984f63f7bdf23c9/index.html)
 
 The demo is a static page. No account, installation, build step, or backend is required.
 
@@ -18,13 +18,13 @@ The demo is a static page. No account, installation, build step, or backend is r
 - 📊 **Session stats:** win rate, current streak, and rounds played
 - 🧾 **Recent round history** with an option to clear it
 - 🔊 Optional sound effects, off by default
-- 🎉 Animated move reveals and a match-win celebration
+- 🎉 Animated move reveals, a short CPU thinking pause, and a match-win celebration
 - 📱 Responsive layout, accessible status updates, and reduced-motion support
 - 🔒 Self-contained static app with no third-party scripts or tracking
 
 ## 🕹️ How to play
 
-1. Open the [live demo](https://htmlpreview.github.io/?https://github.com/puffxhost/rock-paper-scissors/blob/695c1c97c045a6f1676d3d58687df3087af4893a/index.html), or open `index.html` locally.
+1. Open the [live demo](https://htmlpreview.github.io/?https://github.com/puffxhost/rock-paper-scissors/blob/27e0dbb0a647e81d3067fe708984f63f7bdf23c9/index.html), or open `index.html` locally.
 2. Choose **First to 5** or **Endless**.
 3. Pick Rock, Paper, or Scissors. You can also use **R**, **P**, or **S** on your keyboard.
 4. In First to 5, the first player to win five rounds wins the match.
